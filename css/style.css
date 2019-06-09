@@ -1,0 +1,63 @@
+/* Global */
+* {
+	box-sizing: border-box;
+	outline: none;
+}
+html {
+	font-size: 62.5%;
+}
+body {
+	font-size: 3rem;
+	background-color: #FFEB94;
+}
+
+/* header */
+header {
+	text-align: center;
+}
+
+/* main */
+main {
+	margin: auto;
+}
+section {
+	background-color: #FFCCAC;
+	width: 42rem;
+	margin: auto;
+	padding: 2rem;
+	border: gray ridge 6px;
+	border-radius: 5px;
+	box-shadow: 10px 10px 4px black;
+}
+table {
+	margin: auto;
+	padding: 1rem;
+	border-collapse: collapse;
+}
+thead {
+	background-color: #C1E1DC;
+	border: gray ridge 3px;
+}
+th {
+	text-align: right;
+}
+th p {
+	margin-right: 1rem;
+}
+tbody>tr:first-of-type td {
+	padding-top: 2rem;
+
+}
+input {
+	margin: 0.4rem;
+	padding: 1rem;
+	width: 8rem;
+	border-radius: 5px;
+	box-shadow: 2px 2px 0 black;
+}
+input:active {
+	box-shadow: none;
+}
+input[value="AC"], input[value="="] {
+	color: red;
+}
