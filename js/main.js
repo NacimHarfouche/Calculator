@@ -49,7 +49,6 @@ function displayCalculated(value) {
 		isNumberSet = true;
 		para2Elt.text(eval(para1Elt.text()));
 	} else if (/^AC$/.test(value)) { // if value equal to AC
-		para1Elt.text("0");
 		isPointSet = false;
 		isNumberSet = true;
 		stockValue = [];
