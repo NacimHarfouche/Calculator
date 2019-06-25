@@ -1,6 +1,7 @@
 /************************************************************/
 /**************************Variable*************************/
 /**********************************************************/
+
 // select the elements in the DOM
 const buttonElts = $("input[type=button]");
 let para1Elt = $("#calculated");
@@ -17,6 +18,7 @@ let isNumberSet = true;
 /************************************************************/
 /**************************Function*************************/
 /**********************************************************/
+
 function displayCalculated(value) {
 	if (/^[0-9]{1}$/.test(value)) { // button 0 to 9
 		stockNumber += value;
@@ -28,7 +30,9 @@ function displayCalculated(value) {
 			stockDisplay.push(0, value);
 		}else if (isNumberSet === true) {
 			isNumberSet = false;
-			//if (typeof stockNumber[stockNumber.length - 1] == "number")
+			if (/^[x]{1}$/.test(value)) { // if value equal to x i change the value to *
+				value = "*";
+			}
 			stockValue.push(parseFloat(stockNumber), value)
 			stockNumber = "";
 			stockDisplay.push(value);
@@ -36,55 +40,32 @@ function displayCalculated(value) {
 			stockDisplay[stockDisplay.length - 1] = value;
 			stockValue[stockValue.length - 1] = value;
 		}
-	} else if (/^[.]{1}$/.test(value) && isPointSet === false) {
+	} else if (/^[.]{1}$/.test(value) && isPointSet === false) { // if value equal to . and isPointSet is false
 		isPointSet = true;
 		stockNumber += value;
 		stockDisplay.push(value);
-	} else if (/^[=]{1}$/.test(value)) {
+	} else if (/^[=]{1}$/.test(value)) { // if value equal to =
 		isPointSet = false;
 		isNumberSet = true;
-		stockValue.push(parseFloat(stockNumber));
-		stockNumber = "";
-	} else if (/^AC$/.test(value)) {
+		para2Elt.text(eval(para1Elt.text()));
+	} else if (/^AC$/.test(value)) { // if value equal to AC
+		para1Elt.text("0");
 		isPointSet = false;
 		isNumberSet = true;
 		stockValue = [];
 		stockDisplay = [];
 		stockNumber = "";
 	}
-	//stockDisplay = `${stockDisplay}${value}`;
-/*	if (para1Elt.val() == "0") {
-		para1Elt.text("");
+	if (!/^[AC|=]+$/.test(value)) {
+		para1Elt.text(stockDisplay.join(""));
 	}
-	stockDisplay.push(value);
-	for (let one of stockDisplay) {
-		para1Elt.textContent += one;
-	}*/
-	para1Elt.text(stockDisplay.join(""))
-	//console.log(isPointSet)
-	//console.log(parseFloat(stockDisplay.join("")))
 	return stockValue;
 }
+
 // reset the display
 function reset() {
 	para1Elt.text("0");
 	para2Elt.text("0");
-}
-// to set a point 
-function setPoint(stockNumber, number2) {
-	return parseFloat(`${stockNumber}.${number2}`);
-
-}
-function total(arrayValue) {
-	/*for (let elem of array) {
-		if (elem == "x") {
-			elem = "*";
-		}
-	}*/
-	for (let i = 0; i > arrayValue.length; i++) {
-		console.log(arrayValue[i])
-	}
-	console.log("ok")
 }
 
 /************************************************************/
@@ -93,37 +74,12 @@ function total(arrayValue) {
 
 // when a button is push down
 buttonElts.click(function() {
-	if (this.value != "AC" && this.value != "=") {
+	if (this.value != "AC" && this.value != "=") { // if the value is not equal to AC or =
 		stockValue = displayCalculated(this.value);
-	} else if (this.value === "AC") {
+	} else if (this.value === "AC") { // but if it's equal to AC
 		reset();
 		displayCalculated(this.value);
-	} else if (this.value === "=") {
-		total(stockValue);
+	} else if (this.value === "=") { // or if it's equal to =
 		displayCalculated(this.value);
 	}
-	//console.log(stockValue)
-	
 });
-
-
-
-
-/*
-let arrayTest = [5, 6, 5, 10];
-
-arrayTest[arrayTest.length - 1] += 1;
-
-//let test = setPoint(arrayTest[arrayTest.length - 1],3);
-
-console.log(arrayTest[arrayTest.length - 1])
-
-for (let i = 0; i < arrayTest.length; i++) {
-	arrayTest[i] += ""+1;
-}
-console.log(arrayTest)*/
-
-/*let arrayTest = [5, 6, 5, 10, "+", 6, 4];
-
-console.log(arrayTest.join(""))*/
-
